@@ -1,0 +1,54 @@
+﻿@page
+@model ResendEmailConfirmationModel
+@{
+    ViewData["Title"] = "Email Onayını Tekrar Gönder";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h2>E-posta adresinizi girin.</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3 custom-input">
+                <input asp-for="Input.Email" class="form-control custom-border" aria-required="true" placeholder="name@example.com" />
+                <label asp-for="Input.Email" class="form-label">E-posta Adresi</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <button type="submit" class="w-100 btn btn-lg btn-primary custom-button">Tekrar Gönder</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+    .custom-input .form-label {
+        color: #4a90e2; /* Label color */
+        font-weight: bold;
+    }
+
+    .custom-border {
+        border: 2px solid #4a90e2; /* Border color */
+        border-radius: 8px; /* Border radius */
+    }
+
+    .custom-button {
+        background-color: #d0021b; /* Button background color */
+        border-color: #d0021b; /* Button border color */
+        border-radius: 12px; /* Button border radius */
+        font-weight: bold; /* Button font weight */
+    }
+
+        .custom-button:hover {
+            background-color: #ff3b30; /* Button hover background color */
+            border-color: #ff3b30; /* Button hover border color */
+        }
+
+        .custom-button:focus {
+            box-shadow: 0 0 8px rgba(208, 2, 27, 0.5); /* Button focus box shadow */
+        }
+</style>

@@ -1,0 +1,41 @@
+﻿@model Kitap
+
+<form method="post">
+    <input asp-for="Id" hidden />
+    <div class="border p-5 mt-5 rounded bg-light shadow-lg">
+        <div class="row pb-3">
+            <h2 class="text-primary"><i class="fas fa-trash-alt"></i> Kitap Sil</h2>
+            <hr class="my-4">
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="KitapAdi" class="form-label fw-bold text-primary">Kitap Adı</label>
+            <input asp-for="KitapAdi" disabled class="form-control border-0 border-bottom border-primary bg-light text-primary" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Tanim" class="form-label fw-bold text-success">Tanım</label>
+            <textarea asp-for="Tanim" disabled class="form-control border-0 border-bottom border-success bg-light text-success" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Yazar" class="form-label fw-bold text-info">Yazar</label>
+            <input asp-for="Yazar" disabled class="form-control border-0 border-bottom border-info bg-light text-info" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Fiyat" class="form-label fw-bold text-warning">Fiyat</label>
+            <input asp-for="Fiyat" disabled class="form-control border-0 border-bottom border-warning bg-light text-warning" />
+        </div>
+
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-lg btn-danger shadow-sm">
+                <i class="fas fa-trash-alt me-2"></i> Kitap Sil
+            </button>
+
+            <a asp-controller="Kitap" asp-action="Index" class="btn btn-lg btn-primary mt-3 shadow-sm">
+                <i class="fas fa-arrow-left me-2"></i> Kitaplara Geri Dön
+            </a>
+        </div>
+    </div>
+</form>

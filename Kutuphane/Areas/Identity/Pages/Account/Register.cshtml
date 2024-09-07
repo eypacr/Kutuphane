@@ -1,0 +1,126 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Kayıt Ol";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h2>Yeni bir hesap oluşturun.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+            <!-- E-posta Girişi -->
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control custom-input" autocomplete="username" aria-required="true" placeholder="ad@example.com" />
+                <label asp-for="Input.Email" class="form-label form-label-custom">E-posta</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+
+            <!-- Şifre Girişi -->
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control custom-input" autocomplete="new-password" aria-required="true" placeholder="şifre" />
+                <label asp-for="Input.Password" class="form-label form-label-custom">Şifre</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+
+            <!-- Şifre Tekrarı Girişi -->
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ConfirmPassword" class="form-control custom-input" autocomplete="new-password" aria-required="true" placeholder="şifre" />
+                <label asp-for="Input.ConfirmPassword" class="form-label form-label-custom">Şifre Tekrarı</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <!-- Ek Alanlar -->
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Ogrencino" class="form-control custom-input" autocomplete="Ogrencino" aria-required="true" placeholder="Öğrenci No" />
+                <label asp-for="Input.Ogrencino" class="form-label form-label-custom">Öğrenci No</label>
+                <span asp-validation-for="Input.Ogrencino" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Adres" class="form-control custom-input" placeholder="Adres" />
+                <label asp-for="Input.Adres" class="form-label form-label-custom">Adres</label>
+                <span asp-validation-for="Input.Adres" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Fakulte" class="form-control custom-input" placeholder="Fakülte" />
+                <label asp-for="Input.Fakulte" class="form-label form-label-custom">Fakülte</label>
+                <span asp-validation-for="Input.Fakulte" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Bolum" class="form-control custom-input" placeholder="Bölüm" />
+                <label asp-for="Input.Bolum" class="form-label form-label-custom">Bölüm</label>
+                <span asp-validation-for="Input.Bolum" class="text-danger"></span>
+            </div>
+
+            <!-- Kayıt Butonu -->
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-warning animate__animated animate__bounceIn">Kayıt Ol</button>
+
+
+        </form>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h3>Başka bir hizmeti kullanarak kayıt olun.</h3>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div class="alert alert-info" role="alert">
+                        Dış hizmetle oturum açma yapılandırılmamış. ASP.NET uygulamanızı <a href="https://go.microsoft.com/fwlink/?LinkID=532715" class="alert-link">bu makaleyi takip ederek dış hizmetlerle oturum açmaya uygun hale getirebilirsiniz.</a>
+                    </div>
+
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Hesabınızı @provider.DisplayName hesabı ile açın">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <style>
+        .custom-border {
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .form-label-custom {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .form-floating .form-control:focus ~ .form-label-custom {
+            color: #0056b3;
+        }
+
+        /* Özel giriş alanı stilleri */
+        .custom-input {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+}

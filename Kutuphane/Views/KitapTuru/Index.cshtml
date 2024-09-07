@@ -1,0 +1,56 @@
+﻿@model List<KitapTuru>
+
+@if (TempData["basarili"] != null)
+{
+    <h2 style="color: red;">@TempData["basarili"]</h2>
+}
+
+<div class="container">
+    <div class="row pt-3 pb-4">
+        <div>
+            <h1>Kitap Türleri</h1>
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead >
+            <tr>
+                <th class="bg-dark text-white">Id</th>
+                <th class="bg-dark text-white">Kitap Türü</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var kitapTuru in Model)
+            {
+                <tr>
+                    <td>@kitapTuru.Id</td>
+                    <td>@kitapTuru.Ad</td>
+                    <td>
+                        <a asp-controller="KitapTuru" asp-action="Guncelle" asp-route-id="@kitapTuru.Id" class="btn btn-success rounded-pill animate__animated animate__bounceIn" style="width: 120px;">
+                            <i class="fas fa-edit fa-lg fa-fw me-1"></i>Güncelle
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="KitapTuru" asp-action="Sil" asp-route-id="@kitapTuru.Id" class="btn btn-danger rounded-pill animate__animated animate__bounceIn" style="width: 120px;">
+                            <i class="fas fa-trash-alt fa-lg fa-fw me-1"></i>Sil
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="row pt-3 pb-2">
+        <div>
+            <a asp-controller="KitapTuru" asp-action="Ekle" class="btn btn-lg btn-primary rounded-pill animate__animated animate__pulse" role="button">
+                <i class="fas fa-plus-circle fa-lg fa-fw me-1"></i>Yeni Kitap Türü Oluştur
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></script>
+}

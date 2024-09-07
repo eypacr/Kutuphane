@@ -1,0 +1,60 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profil";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h3>@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Username" class="form-control custom-border" placeholder="Kullanıcı adınızı seçiniz." disabled />
+                <label asp-for="Username" class="form-label">Kullanıcı Adı</label>
+            </div>
+            <div class="form-floating mb-3 custom-input">
+                <input asp-for="Input.PhoneNumber" class="form-control custom-border" placeholder="Telefon numaranızı giriniz." />
+                <label asp-for="Input.PhoneNumber" class="form-label">Telefon Numarası</label>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary custom-button">Kaydet</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+    .custom-border {
+        border: 2px solid #4a90e2; /* Border color */
+        border-radius: 8px; /* Border radius */
+    }
+
+    .custom-input .form-label {
+        color: #4a90e2; /* Label color */
+        font-weight: bold; /* Label font weight */
+    }
+
+    .custom-button {
+        background-color: #ff6347; /* Coral */
+        border-color: #ff6347; /* Coral */
+        border-radius: 12px; /* Button border radius */
+        font-weight: bold; /* Button font weight */
+        color: white; /* Text color */
+    }
+
+        .custom-button:hover {
+            background-color: #ff4500; /* Orange Red */
+            border-color: #ff4500; /* Orange Red */
+        }
+
+        .custom-button:focus {
+            box-shadow: 0 0 8px rgba(255, 69, 0, 0.5); /* Orange Red with transparency */
+        }
+
+</style>

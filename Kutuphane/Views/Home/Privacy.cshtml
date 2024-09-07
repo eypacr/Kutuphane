@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "İletişim Bilgileri";
+}
+
+<div class="container contact-container text-center">
+    <br />
+    <h2 class="contact-title">@ViewData["Title"]</h2>
+    <div class="contact-info">
+        <h3>Ihlamur sokak Meneşke Apt. No:5</h3>
+        <h3>Çankaya ANKARA</h3>
+    </div>
+    <br />
+    <div class="contact-email">
+        <h3>E-posta adresimiz:</h3>
+        <h3><a href="mailto:eyyupacar98@gmail.com">eyyupacar98@gmail.com</a></h3>
+    </div>
+</div>
+
+<style>
+    .contact-container {
+        background-color: #f9f9f9;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-title {
+        color: purple;
+        margin-bottom: 20px;
+    }
+
+    .contact-info h3 {
+        color: #333;
+        margin: 10px 0;
+    }
+
+    .contact-email a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .contact-email a:hover {
+            text-decoration: underline;
+        }
+
+</style>

@@ -1,0 +1,32 @@
+﻿@model KitapTuru
+
+<form method="post">
+    <div class="container mt-5">
+        <div class="card border-primary shadow-lg">
+            <div class="card-body">
+                <h2 class="card-title text-primary mb-4">Kitap Türü Ekle</h2>
+                <hr />
+
+                <div class="mb-3">
+                    <label asp-for="Ad" class="form-label">Kitap Türü Adı</label>
+                    <input asp-for="Ad" class="form-control" placeholder="Kitap Türü adını girin..." />
+                    <span asp-validation-for="Ad" class="text-danger"></span>
+                </div>
+
+                <div class="row justify-content-center mt-4">
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-lg btn-success w-100">
+                            <i class="fas fa-plus-circle fa-lg fa-fw me-2"></i> Kitap Türü Ekle
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <a asp-controller="KitapTuru" asp-action="Index" class="btn btn-lg btn-secondary w-100">
+                            <i class="fas fa-arrow-left fa-lg fa-fw me-2"></i> Kitap Türlerine Geri Dön
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

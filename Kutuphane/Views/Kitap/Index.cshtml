@@ -1,0 +1,100 @@
+﻿@model List<Kitap>
+
+@if (TempData["basarili"] != null)
+{
+    <h2 style="color:red">@TempData["basarili"]</h2>
+}
+
+<div class="container">
+
+    <div class="row pt-3 pb-4">
+        <div>
+            <h1>Kitaplar</h1>
+        </div>
+    </div>
+
+    <table class="table table-striped table-bordered rounded">
+        <thead class="bg-dark text-white">
+            <tr >
+                <th scope="col"></th>
+                <th scope="col">Id</th>
+                <th scope="col">Kitap Adı</th>
+                <th scope="col">Tanım</th>
+                <th scope="col">Yazar</th>
+                <th scope="col">Fiyat</th>
+                <th scope="col">Kitap Türü</th>
+
+                @if (User.IsInRole(UserRoles.Role_Admin))
+                {
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                }
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var kitap in Model)
+            {
+                <tr>
+                    <td align="center" valign="middle" class="image-hover-effect rounded">
+                        <img src="@kitap.ResimUrl" style="border-radius: 20px; border: 1px solid #bbb9b9; max-width: 145px; max-height: 275px; height: auto; width: auto;" />
+                    </td>
+                    <td align="center" valign="middle">@kitap.Id</td>
+                    <td align="center" valign="middle">@kitap.KitapAdi</td>
+                    <td align="center" valign="middle">@kitap.Tanim</td>
+                    <td align="center" valign="middle">@kitap.Yazar</td>
+                    <td align="center" valign="middle">@kitap.Fiyat</td>
+                    <td align="center" valign="middle">@kitap.KitapTuru.Ad</td>
+
+                    @if (User.IsInRole(UserRoles.Role_Admin))
+                    {
+                        <td align="center" valign="middle">
+                            <a asp-controller="Kitap" asp-action="EkleGuncelle" asp-route-id="@kitap.Id" class="btn btn-success btn-sm rounded">
+                                <i class="fas fa-edit"></i> Güncelle
+                            </a>
+                        </td>
+                        <td align="center" valign="middle">
+                            <a asp-controller="Kitap" asp-action="Sil" asp-route-id="@kitap.Id" class="btn btn-danger btn-sm rounded">
+                                <i class="fas fa-trash-alt"></i> Sil
+                            </a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (User.IsInRole(UserRoles.Role_Admin))
+    {
+        <div class="row pt-3 pb-2">
+            <div>
+                <a asp-controller="Kitap" asp-action="EkleGuncelle" class="btn btn-lg btn-primary rounded">
+                    <i class="fas fa-plus"></i> Yeni Kitap Oluştur
+                </a>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" integrity="..." crossorigin="anonymous"></script>
+    <style>
+        .btn:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Updated box shadow */
+        }
+
+        .image-hover-effect {
+            transition: transform 0.3s ease; /* Smooth transition */
+        }
+
+            .image-hover-effect:hover img {
+                transform: scale(1.1); /* Scale the image to 110% */
+            }
+
+            /* Adjusted border-radius for more oval (rounded) corners */
+            .image-hover-effect img {
+                border-radius: 20px; /* Example value for more oval corners */
+            }
+
+        /* Additional style adjustments can be made here */
+    </style>
+}

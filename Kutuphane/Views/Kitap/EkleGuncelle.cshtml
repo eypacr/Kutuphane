@@ -1,0 +1,92 @@
+﻿@model Kitap
+
+<form method="post" enctype="multipart/form-data">
+    <input asp-for="ResimUrl" hidden />
+    <div class="row">
+        <div class="col-10">
+            <div class="border p-3 mt-5 rounded bg-light shadow-lg">
+                <div class="row pb-3">
+                    <h2 class="text-primary">@((Model == null ? "Kitap Ekle" : "Kitap Güncelle"))</h2>
+                    <hr class="my-4">
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="KitapAdi" class="form-label fw-bold text-primary">Kitap Adı</label>
+                    <input asp-for="KitapAdi" class="form-control border-0 border-bottom border-primary bg-light text-primary" />
+                    <span asp-validation-for="KitapAdi" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="KitapTuruId" class="form-label fw-bold text-info">Kitap Türü</label>
+                    <select asp-for="KitapTuruId" asp-items="ViewBag.KitapTuruList" class="form-select border-0 border-bottom border-info bg-light text-info">
+                        <option value="">Seçiniz</option>
+                    </select>
+                    <span asp-validation-for="KitapTuruId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Tanim" class="form-label fw-bold text-success">Tanım</label>
+                    <input asp-for="Tanim" class="form-control border-0 border-bottom border-success bg-light text-success" />
+                    <span asp-validation-for="Tanim" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Yazar" class="form-label fw-bold text-info">Yazar</label>
+                    <input asp-for="Yazar" class="form-control border-0 border-bottom border-info bg-light text-info" />
+                    <span asp-validation-for="Yazar" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Fiyat" class="form-label fw-bold text-warning">Fiyat</label>
+                    <input asp-for="Fiyat" class="form-control border-0 border-bottom border-warning bg-light text-warning" />
+                    <span asp-validation-for="Fiyat" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ResimUrl" class="form-label fw-bold text-primary">Kitap Resmi</label>
+                    <input type="file" name="file" class="form-control border-0 border-bottom border-primary bg-light text-primary" />
+                </div>
+
+                @if (Model != null)
+                {
+                    <button type="submit" class="btn btn-lg btn-primary w-100 shadow-sm btn-hover-effect" style="background-color: #FF5733; border-color: #FF5733;">
+                        Güncelle
+                    </button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-lg btn-primary w-100 shadow-sm btn-hover-effect" style="background-color: #FFC300; border-color: #FFC300;">
+                        Kitap Ekle
+                    </button>
+                }
+
+                <a asp-controller="Kitap" asp-action="Index" class="btn btn-lg btn-primary w-100 mt-3 shadow-sm btn-hover-effect" style="background-color: #6C5CE7; border-color: #6C5CE7;">
+                    Kitaplara Geri Dön
+                </a>
+            </div>
+        </div>
+        <div class="col-2">
+            @if (Model != null && !string.IsNullOrEmpty(Model.ResimUrl))
+            {
+                <img src="@Model.ResimUrl" width="100%" style="border-radius: 12px; border: 2px solid #bbb9b9; box-shadow: 0 4px 8px rgba(0,0,0.1);" class="image-hover-effect" />
+            }
+        </div>
+    </div>
+</form>
+
+<style>
+    .btn-hover-effect:hover {
+        filter: brightness(85%);
+        
+    }
+
+    .image-hover-effect {
+        transition: transform 0.3s ease; /* Smooth transition */
+    }
+
+        .image-hover-effect:hover {
+            transform: scale(1.1); /* Scale the image to 110% */
+        }
+
+  
+</style>

@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Kütüphane</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Kutuphane.styles.css" asp-append-version="true" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" integrity="..." crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Kütüphane</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home"></i> Ana Sayfa
+                            </a>
+                        </li>
+
+                        @if (User.IsInRole(UserRoles.Role_Admin))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="KitapTuru" asp-action="Index">
+                                    <i class="fas fa-book"></i> Kitap Türü
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Kitap" asp-action="Index">
+                                    <i class="fas fa-book"></i> Kitap İşlemleri
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Kiralama" asp-action="Index">
+                                    <i class="fas fa-handshake"></i> Kiralama İşlemi
+                                </a>
+                            </li>
+                        }
+
+                        @if (User.IsInRole(UserRoles.Role_Ogrenci))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Kitap" asp-action="Index">
+                                    <i class="fas fa-book"></i> Kitap Listesi
+                                </a>
+                            </li>
+                        }
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">
+                                <i class="fas fa-envelope"></i> İletişim
+                            </a>
+                        </li>
+                    </ul>
+
+                    <partial name="_LoginPartial" />
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <br />
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 Kütüphane - <a asp-area="" asp-controller="Home" asp-action="Privacy">İletişim</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+<style>
+    /* Kutuphane.styles.css */
+
+    /* Örnek özel stiller */
+    .navbar {
+        background-color: #343a40; /* Koyu arka plan rengi */
+    }
+
+    .navbar-brand {
+        color: #ffffff; /* Beyaz metin rengi */
+        font-weight: bold;
+    }
+
+    .nav-link {
+        color: #ffffff !important; /* Bağlantılar için beyaz metin rengi */
+    }
+
+    .footer {
+        padding: 1rem 0; /* Altbilgi için dolgu */
+        background-color: #343a40; /* Koyu altbilgi arka planı */
+        color: #ffffff; /* Beyaz metin rengi */
+    }
+
+
+</style>
